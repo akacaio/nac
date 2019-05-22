@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Vendas</title>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
+<h:body>
+	<div class="container">
+		<h2>#{vendaBean.venda.id==0?"Cadastro":"Atualização"} de Vendas</h2>
+		<h:link outcome="lista-vendas">Vendas</h:link>
+		<h:messages styleClass="alert alert-success"/>
+		<h:form>
+			<h:inputHidden value="#{vendaBean.venda.id}"/>
+			<div class="form-group">
+				<h:outputLabel value="Descrição" for="desc" />
+				<h:inputText styleClass="form-control" value="#{vendaBean.venda.descricao}" id="desc" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Valor" for="valor"/>
+				<h:inputText styleClass="form-control" value="#{vendaBean.venda.valor}" id="valor" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Data" for="data"/>
+				<h:inputText styleClass="form-control" value="#{vendaBean.venda.data.time}" id="data">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:inputText>
+			</div>
+			<h:commandButton value="#{vendaBean.venda.id == 0? 'Cadastrar':'Atualizar'}" styleClass="btn btn-success" action="#{vendaBean.salvar}" />
+			<h:link outcome="lista-vendas" styleClass="btn btn-primary ml-2" rendered="#{vendaBean.venda.id!=0}">Voltar</h:link>
+		</h:form>
+	</div>
+</h:body>
+</html>
